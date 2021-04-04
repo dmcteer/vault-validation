@@ -12,7 +12,7 @@ variable "SSH_FP" {
 }
 
 variable "IMAGE" {
-  default = "centos-7-x64"
+  default = "centos-8-x64"
 }
 
 variable "INST_TYPE" {
@@ -25,5 +25,5 @@ variable "REGION" {
 
 variable "HOST_NAMES" {
   type = list(string)
-  default = ["vault1", "vault2", "vault3"]
+  default = ["vault1", "vault2", "vault3", "vault4", "vault5"]
 }
