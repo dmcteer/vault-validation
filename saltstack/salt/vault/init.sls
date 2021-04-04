@@ -1,6 +1,6 @@
 /usr/local/bin/:
   archive.extracted:
-    - source: https://releases.hashicorp.com/vault/1.2.2/vault_1.2.2_linux_amd64.zip
+    - source: https://releases.hashicorp.com/vault/1.7.0/vault_1.7.0_linux_amd64.zip
     - skip_verify: True
     - enforce_toplevel: False
     - overwrite: True
