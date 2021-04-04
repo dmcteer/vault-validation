@@ -1,0 +1,16 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+192.168.86.22  salt salt.mcteer.org
+192.168.86.32  jenkins jenkins.mcteer.org
+192.168.86.36  vault1 vault1.mcteer.org
+192.168.86.40  rundeck rundeck.mcteer.org
+192.168.86.43  consul1 consul1.mcteer.org
+192.168.86.44  vault2 vault2.mcteer.org
+192.168.86.51  vault3 vault3.mcteer.org
+192.168.86.52  consul2 consul2.mcteer.org
+192.168.86.53  consul3 consul3.mcteer.org
+192.168.86.54  consul4 consul4.mcteer.org
+192.168.86.55  consul5 consul5.mcteer.org
+192.168.86.56  prometheus prometheus.mcteer.org
+192.168.86.57  tyk tyk.mcteer.org
