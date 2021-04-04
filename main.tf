@@ -12,7 +12,7 @@ provider "digitalocean" {
 }
 
 resource "digitalocean_droplet" "vault" {
-  count = "1"
+  count = "5"
   image = var.IMAGE
   name = element(var.HOST_NAMES, count.index)
   region = var.REGION
@@ -32,7 +32,7 @@ resource "digitalocean_droplet" "vault" {
 
   provisioner "remote-exec" {
     inline = [
-      "yum install -y https://repo.saltstack.com/py3/redhat/salt-py3-repo-latest.el7.noarch.rpm",
+      "yum install -y https://repo.saltstack.com/py3/redhat/salt-py3-repo-latest.el8.noarch.rpm",
       "yum install -y salt-minion",
       "mkdir -p /srv/salt",
       "systemctl enable salt-minion.service",

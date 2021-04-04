@@ -4,11 +4,11 @@ variable "DO_PAT" {
 
 variable "PVT_KEY" {
   description = "The full path to the SSH private key for DO Instances"
-  default = "/Users/mcteer/.ssh/id_rsa_do"
+  default = "C:/Users/mcteer/.ssh/id_rsa_do"
 }
 
 variable "SSH_FP" {
-  default = "18:7b:12:c5:0e:f9:94:91:a4:f7:0f:c3:5e:55:3a:e6"
+  default = "21:8c:9e:60:76:c5:ee:fe:e1:96:77:ff:2b:85:0b:e3"
 }
 
 variable "IMAGE" {
@@ -16,11 +16,11 @@ variable "IMAGE" {
 }
 
 variable "INST_TYPE" {
-  default = "1gb"
+  default = "s-1vcpu-1gb"
 }
 
 variable "REGION" {
-  default = "sfo2"
+  default = "sfo3"
 }
 
 variable "HOST_NAMES" {
