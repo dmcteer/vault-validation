@@ -12,15 +12,13 @@ provider "digitalocean" {
 }
 
 resource "digitalocean_droplet" "vault" {
-  count = "5"
+  count = "3"
   image = var.IMAGE
   name = element(var.HOST_NAMES, count.index)
   region = var.REGION
   size = var.INST_TYPE
   private_networking = true
-  ssh_keys = [
-    var.SSH_FP
-  ]
+  ssh_keys = [var.SSH_FP]
 
   connection {
     host = self.ipv4_address
@@ -64,6 +62,27 @@ resource "digitalocean_droplet" "vault" {
     inline = [
       "salt-call --local state.apply vault",
       "systemctl start vault"
+    ]
+  }
+}
+
+output "vault_one" {
+  value = digitalocean_droplet.vault[0].ipv4_address_private
+}
+
+resource "null_resource" "vault_init" {
+
+  connection {
+    host = digitalocean_droplet.vault[0].ipv4_address
+    user = "root"
+    type = "ssh"
+    private_key = file(var.PVT_KEY)
+    timeout = "2m"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "vault operator init -key-shares=1 -key-threshold=1 | grep -E 'Unseal|Root' > /root/keys.txt"
     ]
   }
 }
