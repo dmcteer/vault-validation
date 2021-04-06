@@ -12,7 +12,7 @@ provider "digitalocean" {
 }
 
 resource "digitalocean_droplet" "vault" {
-  count = "3"
+  count = "1"
   image = var.IMAGE
   name = element(var.HOST_NAMES, count.index)
   region = var.REGION
@@ -66,10 +66,6 @@ resource "digitalocean_droplet" "vault" {
   }
 }
 
-output "vault_one" {
-  value = digitalocean_droplet.vault[0].ipv4_address_private
-}
-
 resource "null_resource" "vault_init" {
 
   connection {
@@ -83,6 +79,12 @@ resource "null_resource" "vault_init" {
   provisioner "remote-exec" {
     inline = [
       "vault operator init -key-shares=1 -key-threshold=1 | grep -E 'Unseal|Root' > /root/keys.txt"
+    ]
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sed -n -e 's/^Unseal.*1: //p' keys.txt | xargs vault operator unseal"
     ]
   }
 }
