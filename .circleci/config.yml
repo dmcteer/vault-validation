@@ -38,6 +38,8 @@ workflows:
   vault-destruction:
     jobs:
       - destroy-vault:
+          requires:
+            - vault-deployment
           filters:
             branches:
               only:
