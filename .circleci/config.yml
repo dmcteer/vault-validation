@@ -28,18 +28,16 @@ jobs:
 
 workflows:
   version: 2
-  vault-deployment:
+  validate-vault:
     jobs:
       - deploy-vault:
           filters:
             branches:
               only:
                 - main
-  vault-destruction:
-    jobs:
       - destroy-vault:
           requires:
-            - vault-deployment
+            - deploy-vault
           filters:
             branches:
               only:
