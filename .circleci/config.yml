@@ -5,6 +5,9 @@ jobs:
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     steps:
+      - add_ssh_keys:
+        - fingerprints:
+          - "21:8c:9e:60:76:c5:ee:fe:e1:96:77:ff:2b:85:0b:e3"
       - checkout
       - run:
           command: |
