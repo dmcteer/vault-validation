@@ -4,7 +4,6 @@ variable "DO_PAT" {
 
 variable "PVT_KEY" {
   description = "The full path to the SSH private key for DO Instances"
-  default = "C:/Users/mcteer/.ssh/id_rsa_do"
 }
 
 variable "SSH_FP" {
