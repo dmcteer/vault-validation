@@ -78,13 +78,9 @@ resource "null_resource" "vault_init" {
 
   provisioner "remote-exec" {
     inline = [
-      "vault operator init -key-shares=1 -key-threshold=1 | grep -E 'Unseal|Root' > /root/keys.txt"
-    ]
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "sed -n -e 's/^Unseal.*1: //p' keys.txt | xargs vault operator unseal"
+      "vault operator init -key-shares=1 -key-threshold=1 | grep -E 'Unseal|Root' > /root/keys.txt",
+      "sed -n -e 's/^Unseal.*1: //p' keys.txt | xargs vault operator unseal",
+      "sed -n -e 's/^Initial.*: /export VAULT_TOKEN=/p' /root/keys.txt >> /etc/profile.d/vault.sh"
     ]
   }
 }
