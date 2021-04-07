@@ -1,0 +1,44 @@
+version: 2
+
+jobs:
+  deploy-vault:
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    steps:
+      - checkout
+      - run:
+          command: |
+            terraform init -input=false
+            terraform apply -auto-approve 
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - .
+
+  destroy-vault:
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          command: |
+            terraform destroy -auto-approve
+
+
+workflows:
+  version: 2
+  vault-deployment:
+    jobs:
+      - deploy-vault:
+          filters:
+            branches:
+              only:
+                - main
+  vault-destruction:
+    jobs:
+      - destroy-vault:
+          filters:
+            branches:
+              only:
+                - main
