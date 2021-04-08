@@ -15,7 +15,7 @@ variable "IMAGE" {
 }
 
 variable "INST_TYPE" {
-  default = "s-1vcpu-1gb"
+  default = "s-2vcpu-4gb"
 }
 
 variable "REGION" {
