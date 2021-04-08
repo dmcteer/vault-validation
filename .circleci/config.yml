@@ -18,6 +18,20 @@ jobs:
           paths: 
             - .
 
+  bench-vault:
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "21:8c:9e:60:76:c5:ee:fe:e1:96:77:ff:2b:85:0b:e3"
+      - checkout
+      - run:
+          command: |
+            ssh -i $TF_VAR_PVT_KEY bench.ext.fiosrach.com
+            python3 bench.py
+            exit
+
   destroy-vault:
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
@@ -38,9 +52,13 @@ workflows:
             branches:
               only:
                 - main
+      - bench-vault:
+          requires:
+            - deploy-vault
       - destroy-vault:
           requires:
             - deploy-vault
+            - bench-vault
           filters:
             branches:
               only:
