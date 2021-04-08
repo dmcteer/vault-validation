@@ -28,7 +28,7 @@ jobs:
       - checkout
       - run:
           command: |
-            ssh -i $TF_VAR_PVT_KEY bench.ext.fiosrach.com
+            ssh -o "StrictHostKeyChecking no" -i $TF_VAR_PVT_KEY bench.ext.fiosrach.com
             python3 bench.py
             exit
 
