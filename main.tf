@@ -84,3 +84,40 @@ resource "null_resource" "vault_init" {
     ]
   }
 }
+
+resource "digitalocean_droplet" "benchmark" {
+  image = var.IMAGE
+  name = "benchmark"
+  region = var.REGION
+  size = var.INST_TYPE
+  private_networking = true
+  ssh_keys = [var.SSH_FP]
+
+  connection {
+    host = self.ipv4_address
+    user = "root"
+    type = "ssh"
+    private_key = file(var.PVT_KEY)
+    timeout = "2m"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "yum install -y epel-release",
+      "yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo",
+      "yum install -y git luajit vault",
+      "git clone https://github.com/hashicorp/vault-guides.git"
+    ]
+  }
+
+  provisioner "file" {
+    source = "wrk"
+    destination = "/usr/local/bin/wrk"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /usr/local/bin/wrk"
+    ]
+  }
+}
