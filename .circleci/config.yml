@@ -11,6 +11,7 @@ jobs:
       - checkout
       - run:
           command: |
+            ls -lah /root/.ssh
             terraform init -input=false
             terraform apply -auto-approve 
       - persist_to_workspace:
