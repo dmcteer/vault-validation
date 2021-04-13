@@ -18,8 +18,13 @@ At a high level, a validation pipeline process looks something like this:
  - A number of validation tests are executed against the new Vault cluster, mimicing production workloads.
  - The test results are posted to the CI/CD tool and the new Vault cluster is deprovisioned.
 
-## Detailed Process
+## Dependencies
+This demonstration currently uses the benchmarking instructions created by Stenio Ferreira found here:
 
+https://medium.com/hashicorp-engineering/hashicorp-vault-performance-benchmark-13d0ea7b703f
+
+## Detailed Process
+This demonstration current
 
 
 ## Planned Changes
