@@ -107,7 +107,7 @@ resource "null_resource" "vault_init" {
   }
 
   provisioner "file" {
-    source = "loadtest-policy.hcl"
+    source = "files/loadtest-policy.hcl"
     destination = "/etc/vault.d/loadtest-policy.hcl"
   }
 }
@@ -175,12 +175,12 @@ resource "digitalocean_droplet" "benchmark" {
   }
 
   provisioner "file" {
-    source = "bench.py"
+    source = "files/bench.py"
     destination = "/root/bench.py"
   }
 
   provisioner "file" {
-    source = "wrk"
+    source = "files/wrk"
     destination = "/usr/local/bin/wrk"
   }
 
