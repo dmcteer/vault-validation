@@ -25,11 +25,10 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "21:8c:9e:60:76:c5:ee:fe:e1:96:77:ff:2b:85:0b:e3"
-      - checkout
       - run:
           command: |
-            python3 /root/bench.py | ssh -o "StrictHostKeyChecking no" -i $TF_VAR_PVT_KEY bench.ext.fiosrach.com
-            cat /root/bench.log | ssh -o "StrictHostKeyChecking no" -i $TF_VAR_PVT_KEY bench.ext.fiosrach.com
+            ssh -o "StrictHostKeyChecking no" -i $TF_VAR_PVT_KEY bench.ext.fiosrach.com 'python3 /root/bench.py'
+            ssh -o "StrictHostKeyChecking no" -i $TF_VAR_PVT_KEY bench.ext.fiosrach.com 'cat /root/bench.log'
 
   destroy-vault:
     docker:
