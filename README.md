@@ -19,9 +19,15 @@ At a high level, a validation pipeline process looks something like this:
  - The test results are posted to the CI/CD tool and the new Vault cluster is deprovisioned.
 
 ## Dependencies
-This demonstration currently uses the benchmarking instructions created by Stenio Ferreira found here:
+This demonstration currently follows some of the benchmarking instructions created by Stenio Ferreira here:
 
 https://medium.com/hashicorp-engineering/hashicorp-vault-performance-benchmark-13d0ea7b703f
+
+The above instructions utilize benchmarking scripts created by Roger Berlind that can be found here:
+
+https://github.com/hashicorp/vault-guides/tree/master/operations/benchmarking/wrk-core-vault-operations
+
+
 
 ## Detailed Process
 This demonstration current
