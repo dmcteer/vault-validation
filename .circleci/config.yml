@@ -28,9 +28,8 @@ jobs:
       - checkout
       - run:
           command: |
-            ssh -o "StrictHostKeyChecking no" -i $TF_VAR_PVT_KEY bench.ext.fiosrach.com
-            python3 bench.py
-            exit
+            python3 /root/bench.py | ssh -o "StrictHostKeyChecking no" -i $TF_VAR_PVT_KEY bench.ext.fiosrach.com
+            cat /root/bench.log | ssh -o "StrictHostKeyChecking no" -i $TF_VAR_PVT_KEY bench.ext.fiosrach.com
 
   destroy-vault:
     docker:
